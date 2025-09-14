@@ -106,7 +106,7 @@
 ---
 
 📝 **Submission Instructions**  
-- Provide a neatly formatted document (.docx or PDF).  
+- Provide a neatly formatted document (.docx or md format).  
 - Include diagrams or examples where necessary.  
 - Complete practical activities by attaching screenshots of:
     - GitHub account  
