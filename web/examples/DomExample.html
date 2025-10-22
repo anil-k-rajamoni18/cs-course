@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id = "header1">This is DOM Example</h1>
+    <div class = container>
+        <button id="changeTextBtn">Change Header Text</button>
+        <button id="changeColorBtn">Change Header Color</button>
+        <button id="hideBtn">Hide Header</button>
+        <button id="showBtn">Show Header</button>
+    </div>
+    <script>
+        const header = document.getElementById('header1');
+        const changeTextBtn = document.getElementById('changeTextBtn');
+        const changeColorBtn = document.getElementById('changeColorBtn');   
+        const hideBtn = document.getElementById('hideBtn');
+        const showBtn = document.getElementById('showBtn');
+        changeTextBtn.addEventListener('click', () => {
+            header.textContent = 'Header Text Changed!';
+        });
+        changeColorBtn.addEventListener('click', () => {
+            header.style.color = 'blue';
+        });
+        hideBtn.addEventListener('click', () => {
+            header.style.display = 'none';
+        });
+        showBtn.addEventListener('click', () => {
+            header.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

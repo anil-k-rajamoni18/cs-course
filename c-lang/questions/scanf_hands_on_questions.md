@@ -289,14 +289,12 @@ Q: What happens if you input more than 4 characters?
 int main() {
     char text[50];
     printf("Enter a sentence: ");
-    scanf("%[^
-]", text);
+    scanf("%[^]", text);
     printf("You typed: %s\n", text);
     return 0;
 }
 ```
-Q: What does `%[^
-]` do in scanf()?
+Q: What does `%[^]` do in scanf()?
 
 ---
 
