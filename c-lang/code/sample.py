@@ -1,5 +1,5 @@
-marks = [10,20,30,40,50]
-for i in range(len(marks)):
-    print(f"marks[{i}] = {marks[i]}")
-
-print(marks[7])
+age = int(input("Enter your age: "))
+if age >= 18:
+    print("You are eligible to vote.")
+else:
+    print("You are not eligible to vote.")
