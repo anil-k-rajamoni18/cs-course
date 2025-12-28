@@ -1,20 +1,17 @@
 #include <stdio.h>
 
+struct student {
+    int id;
+    char name[20];
+};
+
 int main() {
     FILE *fp;
-    char ch;
-
-    fp = fopen("sample.txt", "r");
-
-    if (fp == NULL) {
-        printf("File not found or cannot be opened.\n");
-        return 1;
-    }
-
-    while ((ch = fgetc(fp)) != EOF) {
-        printf("%c\n", ch);   
-    }
-
+    struct student s = {1, "Amit"};
+    
+    fp = fopen("stud.dat", "wb");
+    fwrite(&s, sizeof(s), 1, fp);
     fclose(fp);
+    
     return 0;
 }
