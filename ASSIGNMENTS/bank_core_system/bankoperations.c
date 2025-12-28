@@ -1,26 +1,27 @@
 #include <stdio.h>
-#include "operation.h"
+#include "bankoperations.h"
 #include <stdlib.h>
 #include <string.h>
 
 // To create account..
 void create_new_account(){
-            
+      
+         struct Account account;
          printf("To create a account please enter your details.\n");
          printf("Enter your name : ");
-         scanf(" %[^\n]",A.name);
+         scanf(" %[^\n]",account.name);
          printf("Please set a new username : ");
-         scanf(" %[^\n]",A.user_name);
+         scanf(" %[^\n]",account.user_name);
          printf("Please set a new password : ");
-         scanf(" %[^\n]",A.password);
+         scanf(" %[^\n]",account.password);
 
          // for new account, balance will be zero
-         A.balance = 0;
+         account.balance = 0;
 
          // Entering details into file
          FILE *fp;
          fp = fopen("account_details.dat","ab");
-         fwrite(&A,sizeof(A),1,fp);
+         fwrite(&account,sizeof(account),1,fp);
          fclose(fp);
          printf("Your account is created sucessfully.\n");
          printf("\n");
@@ -31,7 +32,7 @@ void login(int choice){
              char user_name[100];
              char password[100];
              int flag = 0;
-
+             struct Account account;
              printf("Enter your username : ");
              scanf(" %[^\n]",user_name);
              printf("Enter your password : ");
@@ -43,8 +44,8 @@ void login(int choice){
                     printf("Something went wrong, try again.\n");
              }
              else{
-                  while( fread(&A,sizeof(A),1,fp)){
-                       if(strcmp(user_name,A.user_name) == 0 && strcmp(password,A.password) == 0){
+                  while( fread(&account,sizeof(account),1,fp)){
+                       if(strcmp(user_name,account.user_name) == 0 && strcmp(password,account.password) == 0){
                                  printf("You logged in successfully.\n");
                                  flag++;
                                  switch(choice){
@@ -78,34 +79,35 @@ void transaction(char *user_name){
 
       FILE *fp;
       FILE *temp;
+      struct Account account;
       fp = fopen("account_details.dat","rb");
       temp = fopen("temp.dat","wb");
 
-      while(fread(&A,sizeof(A),1,fp)){
-            if(strcmp(user_name,A.user_name) != 0){
-                fwrite(&A,sizeof(A),1,temp);
+      while(fread(&account,sizeof(account),1,fp)){
+            if(strcmp(user_name,account.user_name) != 0){
+                fwrite(&account,sizeof(account),1,temp);
             }
             else{
                   if(option == 1){
-                    A.balance = A.balance + money;
-                    fwrite(&A,sizeof(A),1,temp);
+                    account.balance = account.balance + money;
+                    fwrite(&account,sizeof(account),1,temp);
                     printf("Your transaction completed sucessfully.\n");
                   }
 
-                  else if(option == 2 && money <= A.balance){
-                           A.balance = A.balance - money;
-                           fwrite(&A,sizeof(A),1,temp);
+                  else if(option == 2 && money <= account.balance){
+                           account.balance = account.balance - money;
+                           fwrite(&account,sizeof(account),1,temp);
                            printf("Your transaction completed sucessfully.\n");
                   }
-                  
-                   else if(option == 2 && money >= A.balance){
+
+                   else if(option == 2 && money >= account.balance){
                            printf("You can't withdraw this amount.\n");
-                           fwrite(&A,sizeof(A),1,temp);
+                           fwrite(&account,sizeof(account),1,temp);
                   }
 
                   else {
                       printf("Invalid option.\n");
-                      fwrite(&A,sizeof(A),1,temp);
+                      fwrite(&account,sizeof(account),1,temp);
                   }
             }
       }
@@ -122,11 +124,13 @@ void transaction(char *user_name){
 void current_balance(char *user_name){
          
       FILE *fp;
+      struct Account account;
+      
       fp = fopen("account_details.dat","rb");
 
-      while(fread(&A,sizeof(A),1,fp)){
-            if(strcmp(user_name,A.user_name) == 0){
-                printf("Your current balance is %d\n",A.balance);
+      while(fread(&account,sizeof(account),1,fp)){
+            if(strcmp(user_name,account.user_name) == 0){
+                printf("Your current balance is %d\n",account.balance);
                 break;
             }
         }
@@ -139,12 +143,13 @@ void current_balance(char *user_name){
 void account_deletion(char *user_name){
       FILE *fp;
       FILE *temp;
+      struct Account account;
       fp = fopen("account_details.dat","rb");
       temp = fopen("temp.dat","wb");
 
-      while(fread(&A,sizeof(A),1,fp)){
-            if(strcmp(user_name,A.user_name) != 0){
-                fwrite(&A,sizeof(A),1,temp);
+      while(fread(&account,sizeof(account),1,fp)){
+            if(strcmp(user_name,account.user_name) != 0){
+                fwrite(&account,sizeof(account),1,temp);
             }
       }
 
