@@ -1,40 +1,40 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"operation.h"
+#include"employee.h"
 
 // Defining addEmployee function..
 void add_employee(){
-    struct employee E;
+    struct Employee emp;
 
      printf("To add your details , answer below questions.\n");
      printf("Please enter your name : ");
-     scanf(" %[^\n]",E.name);
+     scanf(" %[^\n]",emp.name);
      printf("Please enter your Employee id : ");
-     scanf("%d",&E.id);
+     scanf("%d",&emp.id);
      printf("Please enter your basic salary which was given by manager : ");
-     scanf("%f",&E.basic_salary);
+     scanf("%f",&emp.basic_salary);
 
      // Finding remaing details..
-     
-    E.hra =  E.basic_salary/5;
-    E.da = E.basic_salary/10;
-    E.gross_salary = E.basic_salary + E.hra + E.da;
 
-    if(E.gross_salary >= 100000){
-        E.tax = E.gross_salary/10;
+    emp.hra =  emp.basic_salary/5;
+    emp.da = emp.basic_salary/10;
+    emp.gross_salary = emp.basic_salary + emp.hra + emp.da;
+
+    if(emp.gross_salary >= 100000){
+        emp.tax = emp.gross_salary/10;
     }
     else {
-        E.tax = E.gross_salary/20;
+        emp.tax = emp.gross_salary/20;
     }
-     
-    E.net_salary = E.gross_salary - E.tax; 
+
+    emp.net_salary = emp.gross_salary - emp.tax;
 
     // Entering details into file..
 
     FILE *fp;
     fp = fopen("Employee_records.dat","ab");
-    fwrite(&E,sizeof(E),1,fp);
+    fwrite(&emp,sizeof(emp),1,fp);
     fclose(fp);
     printf("Your details are sucessfully added.\n");
     printf("\n");
@@ -42,7 +42,7 @@ void add_employee(){
 
 // Login function..
 int  login(int choice){
-     struct employee E;
+     struct Employee emp;
      char name[100];
      int id;
      int flag = 0;
@@ -60,8 +60,8 @@ int  login(int choice){
         return 0;
      }
 
-     while(fread(&E,sizeof(E),1,fp)){
-            if(strcmp(name,E.name) == 0 && id == E.id){
+     while(fread(&emp,sizeof(emp),1,fp)){
+            if(strcmp(name,emp.name) == 0 && id == emp.id){
                 printf("You logged in successfully.\n");
                 flag++;
                 break;
@@ -87,7 +87,7 @@ return 0;
 
 // calculating salary..
 int calculate_salary(int id){
-     struct employee E;
+     struct Employee emp;
      FILE *fp;
      fp = fopen("Employee_records.dat","rb");
     
@@ -96,8 +96,8 @@ int calculate_salary(int id){
         return 0;
      }
 
-     while(fread(&E,sizeof(E),1,fp)){
-            if(id == E.id){
+     while(fread(&emp,sizeof(emp),1,fp)){
+            if(id == emp.id){
                 printf("Your net salary is %.2f\n",E.net_salary);
                 break;
             }
@@ -110,7 +110,7 @@ return 0;
 
 // Generating pay slip..
 int generate_payslip(int id){
-     struct employee E;
+     struct Employee emp;
      FILE *fp;
      fp = fopen("Employee_records.dat","rb");
     
@@ -119,20 +119,20 @@ int generate_payslip(int id){
         return 0;
      }
 
-     while(fread(&E,sizeof(E),1,fp)){
-            if(id == E.id){
+     while(fread(&emp,sizeof(emp),1,fp)){
+            if(id == emp.id){
                 printf("-------------------------------------\n");
                 printf("              PAY SLIP               \n");
                 printf("-------------------------------------\n");
                 printf("\n");
-                printf("1.Employee name   : %s\n",E.name);
-                printf("2.Employee id     : %d\n",E.id);
-                printf("3.Basic salary    : %.2f\n",E.basic_salary);
-                printf("4.HRA             : %.2f\n",E.hra);
-                printf("5.DA              : %.2f\n",E.da);
-                printf("6.Gross salary    : %.2f\n",E.gross_salary);
-                printf("7.Tax amount      : %.2f\n",E.tax);
-                printf("8.Net salary      : %.2f\n",E.net_salary);
+                printf("1.Employee name   : %s\n",emp.name);
+                printf("2.Employee id     : %d\n",emp.id);
+                printf("3.Basic salary    : %.2f\n",emp.basic_salary);
+                printf("4.HRA             : %.2f\n",emp.hra);
+                printf("5.DA              : %.2f\n",emp.da);
+                printf("6.Gross salary    : %.2f\n",emp.gross_salary);
+                printf("7.Tax amount      : %.2f\n",emp.tax);
+                printf("8.Net salary      : %.2f\n",emp.net_salary);
                 break;
             }
      }

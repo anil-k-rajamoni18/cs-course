@@ -1,7 +1,7 @@
-#ifndef OPERATION_H
-#define OPERATION_H
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
 
-struct employee {
+struct Employee {
        char name[100];
        int id;
        float basic_salary;

@@ -17,9 +17,8 @@ struct Transaction {
 };
 // Transaction: kumar18, Deposit, 5000, 2023-10-05 14:30:00
 void create_new_account();
-void transaction(char *);
-void current_balance(char *);
-void account_deletion(char *);
-void login(int);
+void deposit_withdraw(char *);
+void check_balance(char *);
+void delete_account(char *);
 
 #endif

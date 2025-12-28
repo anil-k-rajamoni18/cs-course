@@ -27,47 +27,9 @@ void create_new_account(){
          printf("\n");
 }
 
-// Login function..
-void login(int choice){
-             char user_name[100];
-             char password[100];
-             int flag = 0;
-             struct Account account;
-             printf("Enter your username : ");
-             scanf(" %[^\n]",user_name);
-             printf("Enter your password : ");
-             scanf(" %[^\n]",password);
-    
-             FILE *fp;
-             fp = fopen("account_details.dat","rb");
-             if(fp == NULL){
-                    printf("Something went wrong, try again.\n");
-             }
-             else{
-                  while( fread(&account,sizeof(account),1,fp)){
-                       if(strcmp(user_name,account.user_name) == 0 && strcmp(password,account.password) == 0){
-                                 printf("You logged in successfully.\n");
-                                 flag++;
-                                 switch(choice){
-                                       case 2 : transaction(user_name);
-                                                break;
-                                       case 3 : current_balance(user_name);    
-                                                break ;
-                                       case 4 : account_deletion(user_name);             
-                                                break;
-                                 }
-                       }
-                  }
-                  fclose(fp);
-                  if(flag == 0){
-                      printf("You have entered wrong information.\n");
-                  }
-             }
-             printf("\n");
-}
 
 // Deposite or withdraw money..
-void transaction(char *user_name){
+void deposit_withdraw(char *user_name){
       int option,money;
 
       printf("Select one option from below.\n");
@@ -121,7 +83,7 @@ void transaction(char *user_name){
 }
 
 // To view current balance..
-void current_balance(char *user_name){
+void check_balance(char *user_name){
          
       FILE *fp;
       struct Account account;
@@ -140,7 +102,7 @@ void current_balance(char *user_name){
 }
 
 // To delete account..
-void account_deletion(char *user_name){
+void delete_account(char *user_name){
       FILE *fp;
       FILE *temp;
       struct Account account;
