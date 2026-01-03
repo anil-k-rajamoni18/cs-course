@@ -20,5 +20,6 @@ void create_new_account();
 void deposit_withdraw(char *);
 void check_balance(char *);
 void delete_account(char *);
+void transaction_histroy(char *);
 
 #endif

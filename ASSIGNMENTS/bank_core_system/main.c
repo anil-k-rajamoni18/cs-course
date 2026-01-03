@@ -3,6 +3,8 @@
 #include "auth.h"
 #include <stdlib.h>
 
+void display_menu();
+void loged_in_menu(int);
 
 int main(){
      // To display menu..
@@ -44,13 +46,15 @@ int main(){
                             break;
                     case 4 : delete_account(username);
                             break;
-                    case 5 : printf("Thank you..\n");
+                    case 5 : transaction_histroy(username);
+                             break ;      
+                    case 6 : printf("Thank you..\n");
                             break;         
                     default : printf("Invalid choice.Try again.\n\n");
                             break;
             }
         }
-      }while(choice != 5);
+      }while(choice != 6);
   return 0;
 }
 
@@ -62,7 +66,8 @@ void display_menu(){
       printf("2.Deposite or withdraw money.\n");
       printf("3.Check current balance.\n");
       printf("4.To delete account.\n");
-      printf("5.To exit.\n");
+      printf("5.To check transaction histroy\n");
+      printf("6.To exit.\n");
 }
 
 void loged_in_menu(int choice){
@@ -70,8 +75,6 @@ void loged_in_menu(int choice){
       printf("2.Deposite or withdraw money.\n");
       printf("3.Check current balance.\n");
       printf("4.To delete account.\n");
-      printf("5.To exit.\n");
-      printf("\n");
-      printf("Entered choice is : %d\n",choice);
-      printf("\n");  
+      printf("5.To check transaction histroy\n");
+      printf("6.To exit.\n");  
 }
