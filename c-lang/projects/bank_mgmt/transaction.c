@@ -3,6 +3,8 @@
 #include <time.h>
 #include "transaction.h"
 
+void getCurrentTimestamp(char *buffer);
+
 void addTransaction(int accNo, char type[], float amount) {
     struct Transaction t;
     FILE *fp = fopen("transactions.dat", "ab");
