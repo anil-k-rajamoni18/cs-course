@@ -3,11 +3,13 @@
 
 struct Transaction {
     int accNo;
-    char type[10];   // Deposit / Withdraw / Interest
+    char type[10];
     float amount;
+    char timestamp[30];
 };
 
 void addTransaction(int accNo, char type[], float amount);
 void showTransactions(int accNo);
 
 #endif
+
